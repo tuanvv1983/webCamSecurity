@@ -1,0 +1,31 @@
+{
+  "name": "oz-webcam-security",
+  "version": "0.0.1",
+  "description": "A minimal security application, uses webcam",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron main.js",
+    "postinstall": "install-app-deps",
+    "build": "electron-packager ./ --platform=win32 --arch=x64 --overwrite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OleksiiZubko/webCamSecurity.git"
+  },
+  "keywords": [
+    "Electron",
+    "webcam",
+    "security",
+    "home"
+  ],
+  "author": "Oleksii Zubko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/OleksiiZubko/webCamSecurity/issues"
+  },
+  "homepage": "https://github.com/OleksiiZubko/webCamSecurity#readme",
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.0",
+    "electron-builder": "~3.9.0"
+  }
+}
