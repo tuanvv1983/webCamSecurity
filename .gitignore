@@ -1,2 +1,9 @@
 # sublime
 *.sublime-*
+
+# node
+npm-debug.log
+node_modules
+
+# builds
+oz-webcam-security-win32-x64
