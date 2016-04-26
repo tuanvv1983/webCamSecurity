@@ -12,5 +12,5 @@ npm install
 #dev. start
 npm start
 
-#dev.build
+#dev.build for win x64
 npm run buildForWindows
