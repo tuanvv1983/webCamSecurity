@@ -4,12 +4,12 @@ Use your webcam as home security system.
 
 Just playing with http://electron.atom.io/ and MediaRecorder API.
 
-After starting, the app do recording the video from webcam and storing in to a ./records folder
+After app starts, the video is recording from your webcam and is storing in to a ./records folder in base64 format
 
 #dev. install
 npm install
 
-#dev. start
+#dev. start development
 npm start
 
 #dev.build for win x64
