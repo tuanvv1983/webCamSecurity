@@ -6,20 +6,62 @@
   </head>
   <body>
     <video autoplay></video>
-
+    <script src="./node_modules/msr/MediaStreamRecorder.js"> </script>
     <script>
-      var errorCallback = function(e) {
-        console.log('Reeeejected!', e);
-      };
+      var fs = require('fs');
+      var video = document.querySelector('video');
+      var mediaRecorder;
+      var mediaConstraints = {audio: false, video: true};
+      var timeInterval = 10*1000;
 
-      navigator.getUserMedia  = navigator.webkitGetUserMedia;
+      function prepareFolderForRecords() {
+        fs.stat('./records', (err, stats) => {
+          if(err) fs.mkdir('./records', (err) => {if(err) throw err;});
+        }); 
+      }
 
-      // Not showing vendor prefixes.
-      navigator.getUserMedia({video: true, audio: false}, function(localMediaStream) {
-        var video = document.querySelector('video');
-        video.src = window.URL.createObjectURL(localMediaStream);
-      }, errorCallback);
+      function captureCameraMedia(mediaOptions, successCallback, errorCallback) {
+        navigator.webkitGetUserMedia(mediaOptions, successCallback, errorCallback);
+      }
+    
+      function onMediaSuccess(stream) {
+        video.src = window.URL.createObjectURL(stream);
+        video.width = 800;
+        video.height = 600;
 
+        mediaRecorder = new MediaStreamRecorder(stream);
+        mediaRecorder.stream = stream;
+        mediaRecorder.mimeType = 'video/webm';
+        mediaRecorder.videoWidth = video.width;
+        mediaRecorder.videoHeight = video.height;
+
+        mediaRecorder.ondataavailable = function(blob) {
+          var reader = new window.FileReader();
+          reader.readAsDataURL(blob); 
+          reader.onloadend = function() {
+            base64data = reader.result;                
+            saveToFolder(base64data);
+          }
+        };
+
+        mediaRecorder.start(timeInterval);
+      }
+
+      function onMediaError(e) {
+          console.error('media error', e);
+      }
+
+      function saveToFolder(base64data) {
+        var date = new Date().getTime();
+        var fileName = 'video'+ date + '.txt';
+
+        fs.writeFile('./records/'+fileName, base64data, 'utf8', (err) => {
+          if (err) throw err;
+        });
+      }
+
+      prepareFolderForRecords();
+      captureCameraMedia(mediaConstraints, onMediaSuccess, onMediaError);
     </script>
   </body>
 </html>

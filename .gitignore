@@ -7,3 +7,6 @@ node_modules
 
 # builds
 oz-webcam-security-win32-x64
+
+#folder for the records
+records
