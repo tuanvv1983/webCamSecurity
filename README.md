@@ -2,7 +2,7 @@
 
 Use your webcam as home security system.
 
-Just playing with http://electron.atom.io/ and MediaRecorder API.
+Just playing with http://electron.atom.io/ and MediaRecorder API (https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder_API).
 
 After app starts, the video is recording from your webcam and is storing in to a ./records folder in base64 format
 
