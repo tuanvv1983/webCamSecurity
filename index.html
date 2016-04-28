@@ -38,9 +38,8 @@
         mediaRecorder.ondataavailable = function(blob) {
           var reader = new window.FileReader();
           reader.readAsDataURL(blob); 
-          reader.onloadend = function() {
-            base64data = reader.result;                
-            saveToFolder(base64data);
+          reader.onloadend = function() {              
+            saveToFolder(reader.result);
           }
         };
 
